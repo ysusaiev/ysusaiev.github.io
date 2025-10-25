@@ -146,3 +146,10 @@ body.debug-borders *:focus {
   outline-color: rgba(0, 150, 255, 0.7);
   outline-width: 2px;
 }
+
+.highlight {
+  background-color: #8bac0f;
+  color: #fff;        /* optional: make text white for contrast */
+  padding: 0.1em 0.2em;
+  border-radius: 2px; /* optional: subtle rounding */
+}
