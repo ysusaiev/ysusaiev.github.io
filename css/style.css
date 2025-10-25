@@ -100,3 +100,50 @@ footer {
   display:inline-block;
   transform: rotate(180deg);
 }
+
+body.debug-borders * {
+  outline: 1px solid rgba(255, 0, 0, 0.25);
+  /* use outline so layout isn't affected; semi-transparent so nested outlines remain readable */
+}
+
+body.debug-borders *:not(:visible) {
+  outline: none;
+}
+
+/* Optional stronger highlight for focused/hovered elements */
+body.debug-borders *:hover,
+body.debug-borders *:focus {
+  outline-color: rgba(0, 150, 255, 0.7);
+  outline-width: 2px;
+}
+
+header.header {
+  display: flex;
+  justify-content: space-between; /* Pushes items to opposite sides */
+  align-items: center;           /* Aligns vertically */
+  padding: 10px 20px;
+}
+
+header.header .left {
+  text-align: left;
+}
+
+header.header .right {
+  text-align: right;
+}
+
+.tiny-icon {
+  width: 53px;        /* adjust the size */
+  height: 53px;
+  vertical-align: middle; /* aligns it with the text */
+  margin-left: 0rem;    /* space between text and icon */
+}
+
+a {
+  color: #0066cc;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
