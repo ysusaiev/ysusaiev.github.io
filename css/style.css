@@ -1,4 +1,4 @@
-/* Global */
+/* Global Styles */
 body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   background-color: #EEEDE8;
@@ -12,6 +12,9 @@ a {
   color: #0066cc;
   text-decoration: none;
 }
+a:hover {
+  text-decoration: underline;
+}
 
 header, nav, main, footer {
   max-width: 900px;
@@ -23,22 +26,44 @@ header, nav, main, footer {
 header {
   text-align: left;
   margin: 2rem auto 1rem auto;
-  padding: 0 1rem; /* removed photo padding */
+  padding: 0 1rem;
   min-height: auto;
 }
-
 header h1 {
   font-size: 2rem;
   font-weight: 600;
   margin: 0;
   line-height: 1.1;
 }
-
 header p {
   font-size: 1.1rem;
   color: #555;
   margin-top: 0.3rem;
   margin-bottom: 0;
+}
+
+/* Header with avatar and right text */
+header.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+}
+header.header .left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  text-align: left;
+}
+header.header .right {
+  text-align: right;
+}
+.tiny-icon {
+  width: 53px;
+  height: 53px;
+  object-fit: cover;
+  border-radius: 8px;
+  flex-shrink: 0;
 }
 
 /* Navigation */
@@ -55,7 +80,6 @@ nav ul {
 section {
   margin-bottom: 3rem;
 }
-
 h2 {
   font-size: 1.5rem;
   margin-bottom: 1rem;
@@ -67,7 +91,6 @@ h2 {
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 1.5rem;
 }
-
 .project-card {
   border: 1px solid #ddd;
   padding: 1rem;
@@ -83,67 +106,43 @@ footer {
   font-size: 0.9rem;
   color: #444;
 }
-
-/* Responsive */
-@media (max-width: 600px) {
-  header {
-    padding: 0 1rem;
-    text-align: center;
-  }
-
-  header h1 {
-    font-size: 1.8rem;
-  }
-}
-
 .copyleft {
-  display:inline-block;
+  display: inline-block;
   transform: rotate(180deg);
 }
 
-body.debug-borders * {
-  outline: 1px solid rgba(255, 0, 0, 0.25);
-  /* use outline so layout isn't affected; semi-transparent so nested outlines remain readable */
+/* Responsive */
+@media (max-width: 600px) {
+  header.header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  header.header .left {
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+  .tiny-icon {
+    width: 40px;
+    height: 40px;
+  }
+  header h1 {
+    font-size: 1.8rem;
+  }
+  header p {
+    font-size: 1rem;
+  }
 }
 
+/* Debug borders */
+body.debug-borders * {
+  outline: 1px solid rgba(255, 0, 0, 0.25);
+}
 body.debug-borders *:not(:visible) {
   outline: none;
 }
-
-/* Optional stronger highlight for focused/hovered elements */
 body.debug-borders *:hover,
 body.debug-borders *:focus {
   outline-color: rgba(0, 150, 255, 0.7);
   outline-width: 2px;
-}
-
-header.header {
-  display: flex;
-  justify-content: space-between; /* Pushes items to opposite sides */
-  align-items: center;           /* Aligns vertically */
-  padding: 10px 20px;
-}
-
-header.header .left {
-  text-align: left;
-}
-
-header.header .right {
-  text-align: right;
-}
-
-.tiny-icon {
-  width: 53px;        /* adjust the size */
-  height: 53px;
-  vertical-align: middle; /* aligns it with the text */
-  margin-left: 0rem;    /* space between text and icon */
-}
-
-a {
-  color: #0066cc;
-  text-decoration: none;
-}
-
-a:hover {
-  text-decoration: underline;
 }
