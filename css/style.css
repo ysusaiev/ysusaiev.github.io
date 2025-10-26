@@ -42,17 +42,22 @@ main {
 
 header.header .left {
   display: flex;
-  align-items: center;
+  align-items: center; /* Changed from stretch to center */
   gap: 1rem;
   text-align: left;
 }
 
+.avatar-link {
+  display: block;
+}
 .tiny-icon {
   width: 55px;
   height: 55px;
   object-fit: cover;
   border-radius: 8px;
   flex-shrink: 0;
+  vertical-align: middle; /* Added vertical-align middle */
+  display: block;
 }
 
 /* Left text block */
@@ -114,16 +119,29 @@ footer {
     align-items: center;
   }
 
+  /* Reorder elements inside .left for mobile: avatar, name, mini-nav */
+  header.header .left {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* keep center alignment, no stretch */
+  }
   .tiny-icon {
+    order: 1;
     width: 45px;
     height: 45px;
+    vertical-align: middle; /* keep vertical-align for mobile */
   }
-
+  .left-text {
+    text-align: center; /* centers name and mini-nav */
+    width: 100%;        /* optional: ensures it takes full container width */
+    order: 2;
+  }
   .mini-nav {
+    order: 3;
     font-size: 1rem;
   }
-
   header.header .right {
+    order: 4;
     text-align: center;
     margin-top: 0.5rem;
   }
@@ -143,8 +161,26 @@ footer {
 /* Projects Grid */
 .project-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: 1fr; /* single column by default */
   gap: 1.5rem;
+}
+
+/* Wide screens - keep single card width, unchanged */
+@media (min-width: 601px) {
+  .project-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Mobile responsive */
+@media (max-width: 600px) {
+  .project-grid {
+    grid-template-columns: 1fr; /* stacked for mobile */
+  }
+
+  .project-card {
+    padding: 1rem;
+  }
 }
 
 .project-card {
