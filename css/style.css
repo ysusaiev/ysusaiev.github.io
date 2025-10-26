@@ -16,95 +16,85 @@ a:hover {
   text-decoration: underline;
 }
 
-header, nav, main, footer {
+/* Unified layout container width and alignment */
+header,
+nav,
+main,
+footer {
   max-width: 900px;
-  margin: auto;
+  width: 100%;
+  box-sizing: border-box; /* include padding inside total width */
+  margin: 0 auto;
   padding: 2rem 1rem;
 }
 
 /* Header */
-header {
-  text-align: left;
-  margin: 2rem auto 1rem auto;
-  padding: 0 1rem;
-  min-height: auto;
-}
-header h1 {
-  font-size: 2rem;
-  font-weight: 600;
-  margin: 0;
-  line-height: 1.1;
-}
-header p {
-  font-size: 1.1rem;
-  color: #555;
-  margin-top: 0.3rem;
-  margin-bottom: 0;
-}
-
-/* Header with avatar and right text */
 header.header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 10px 20px;
+  margin: 2rem auto;
 }
+main {
+  margin: 2rem auto;
+}
+
 header.header .left {
   display: flex;
   align-items: center;
   gap: 1rem;
   text-align: left;
 }
-header.header .right {
-  text-align: right;
-}
+
 .tiny-icon {
-  width: 53px;
-  height: 53px;
+  width: 55px;
+  height: 55px;
   object-fit: cover;
   border-radius: 8px;
   flex-shrink: 0;
 }
 
-/* Navigation */
-nav ul {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  list-style: none;
-  padding: 0;
-  margin-bottom: 2rem;
+/* Left text block */
+.left-text h1 {
+  font-size: 2rem;
+  font-weight: 600;
+  margin: 0;
+  line-height: 1.1;
 }
 
-/* Sections */
-section {
-  margin-bottom: 3rem;
-}
-h2 {
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
+/* Navbar line under name */
+.mini-nav {
+  margin-top: 0.3rem;
+  font-size: 1.05rem;
 }
 
-/* Projects Grid */
-.project-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1.5rem;
+.mini-nav a {
+  color: #0066cc;
+  text-decoration: none;
+  margin-right: 1rem;
 }
-.project-card {
-  border: 1px solid #ddd;
-  padding: 1rem;
-  border-radius: 8px;
-  background: #f9f9f9;
+
+.mini-nav a:last-child {
+  margin-right: 0;
+}
+
+/* Right address block */
+header.header .right {
+  text-align: right;
+  font-size: 1rem;
+  color: #444;
+  line-height: 1.4;
 }
 
 /* Footer */
 footer {
   text-align: center;
   padding: 1rem;
-  border-top: 1px solid #ddd;
+  /* border-top: 1px solid #ddd; */
   font-size: 0.9rem;
   color: #444;
+  margin-top: 2rem;
 }
 .copyleft {
   display: inline-block;
@@ -118,38 +108,117 @@ footer {
     align-items: center;
     text-align: center;
   }
+
   header.header .left {
-    gap: 0.5rem;
-    margin-bottom: 0.5rem;
+    flex-direction: column;
+    align-items: center;
   }
+
   .tiny-icon {
-    width: 40px;
-    height: 40px;
+    width: 45px;
+    height: 45px;
   }
-  header h1 {
-    font-size: 1.8rem;
-  }
-  header p {
+
+  .mini-nav {
     font-size: 1rem;
   }
+
+  header.header .right {
+    text-align: center;
+    margin-top: 0.5rem;
+  }
 }
 
-/* Debug borders */
-body.debug-borders * {
-  outline: 1px solid rgba(255, 0, 0, 0.25);
-}
-body.debug-borders *:not(:visible) {
-  outline: none;
-}
-body.debug-borders *:hover,
-body.debug-borders *:focus {
-  outline-color: rgba(0, 150, 255, 0.7);
-  outline-width: 2px;
-}
-
+/* Highlight */
 .highlight {
   background-color: #8bac0f;
-  color: #fff;        /* optional: make text white for contrast */
-  padding: 0.1em 0.2em;
-  border-radius: 2px; /* optional: subtle rounding */
+  color: #fff;
+  padding: 0.01em 0.3em;
+  border-radius: 1px;
+  display: inline-block;             /* needed for transform */
+  transform: rotate(0deg) skew(0deg);  /* slight rotation + skew */
+  transform-origin: center;          /* rotate around center */
+}
+
+/* Projects Grid */
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.project-card {
+  padding: 1.5rem;
+  border-radius: 8px;
+  background: #f9f9f9;
+  text-align: justify;
+}
+
+/* Equal vertical spacing inside the card */
+.project-card h2,
+.project-card p,
+.project-card a {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.project-card p:last-child {
+  margin-bottom: 0;
+}
+
+/* ==== DEBUG BORDERS (paste at end of css/style.css) ==== */
+/* Enable by adding class="debug-borders" to <body> */
+
+/* General faint outline for everything */
+body.debug-borders * {
+  outline: 1px solid rgba(255, 0, 0, 0.26) !important; /* faint red */
+  box-shadow: none !important; /* avoid any shadow interference */
+}
+
+/* Stronger distinct outlines for main layout containers */
+body.debug-borders header {
+  outline: 2px solid rgba(0, 120, 255, 0.8) !important; /* blue */
+}
+body.debug-borders main {
+  outline: 2px solid rgba(0, 200, 120, 0.8) !important; /* green */
+}
+body.debug-borders footer {
+  outline: 2px solid rgba(150, 0, 200, 0.8) !important; /* purple */
+}
+body.debug-borders nav {
+  outline: 2px dashed rgba(255, 140, 0, 0.9) !important; /* orange dashed */
+}
+
+/* Make outlines thicker on hover so it's easy to inspect */
+body.debug-borders *:hover,
+body.debug-borders *:focus {
+  outline-width: 3px !important;
+  outline-offset: 2px !important;
+  outline-color: rgba(0,0,0,0.9) !important;
+}
+
+/* Optionally hide outlines on things that truly shouldn't show (images, icons) */
+/* comment out these two lines if you want borders on EVERYTHING */
+body.debug-borders img,
+body.debug-borders svg {
+  outline: 1px solid rgba(255, 0, 0, 0.15) !important;
+}
+
+/* quick helper to display element name (dev-only) — uncomment if needed */
+/* body.debug-borders *::after { content: attr(data-debug); position: absolute; right: 0; font-size: 10px; color: rgba(0,0,0,0.6); } */
+
+#about {
+  text-align: justify;
+}
+
+.mini-nav a {
+  color: #0066cc;
+  text-decoration: none;
+  margin-right: 1rem;
+  transition: color 0.3s, text-decoration 0.3s;
+}
+
+.mini-nav a:hover {
+  color: #0066cc;
+  text-decoration: underline;
 }
